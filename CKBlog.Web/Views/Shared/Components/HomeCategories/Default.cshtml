@@ -1,0 +1,11 @@
+﻿@model IEnumerable<CKBlog.Entity.DbObjects.Category>
+
+<div class="content">
+    <ul>
+
+        @foreach (var item in Model.Where(item => item.IsActive).Take(24))
+        {
+            <li><a href="#">- @item.Name</a></li>
+        }
+    </ul>
+</div>

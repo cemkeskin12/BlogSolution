@@ -1,0 +1,46 @@
+﻿@model List<CKBlog.Entity.DbObjects.Role>
+<ol class="breadcrumb mb-3 mt-2">
+    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
+    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Role" asp-action="Index">Roller</a></li>
+</ol>
+<div class="card mb-4 mt-2">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Makaleler
+        @*<a asp-area="Admin" asp-controller="Role" asp-action="Assign" class="btn btn-success float-right font-weight-bold">Ekle <i class="fa fa-plus"></i></a>*@
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="rolesTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Rol Adı</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Rol Adı</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <!--<td>-->@*<a class="text-warning" asp-area="Admin" asp-controller="Role" asp-action="Update" asp-route-id="@item.Id">Düzenle</a>*@<!--</td>-->
+                            <!--<td>-->@*<a class="text-danger" asp-area="Admin" asp-controller="Role" asp-action="Delete" asp-route-id="@item.Id">Sil</a>*@<!--</td>-->
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Admin/RoleDataTable.js" type="application/ecmascript"></script>
+}

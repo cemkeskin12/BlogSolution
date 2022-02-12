@@ -1,0 +1,141 @@
+﻿@using System.Text.RegularExpressions
+@model ArticleSearchViewModel
+@{
+    ViewBag.Title = "Arama Sonuçları";
+    Layout = "_Layout";
+    Regex regex = new Regex("<[^>]*>");
+}
+<section class="blog-posts">
+
+    <div class="col-md-12">
+        <div class="container">
+            <h1 class="my-4">
+                <h1 class="my-4">
+                    Arama Sonuçları
+                </h1>
+                <form>
+                    <div class="form-row">
+                        <input type="hidden" id="keyword" value="@Model.Keyword" />
+                        <input type="hidden" id="current-page" value="@Model.ArticleListDto.CurrentPage" />
+                        <div class="form-group col-md-6">
+                            <select class="form-control" id="select-page-size">
+                                <option selected="@(Model.ArticleListDto.PageSize == 3 ? "selected" : null)" value="3">Göster : 3</option>
+                                <option selected="@(Model.ArticleListDto.PageSize == 5 ? "selected" : null)" value="5">Göster : 5</option>
+                                <option selected="@(Model.ArticleListDto.PageSize == 10 ? "selected" : null)" value="10">Göster : 10</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <select class="form-control" id="select-is-ascending">
+                                <option selected="@(Model.ArticleListDto.IsAscending == false ? "selected" : null)" value="false">Sırala : En Yeni</option>
+                                <option selected="@(Model.ArticleListDto.IsAscending ? "selected" : null)" value="true">Sırala : En Eski</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="all-blog-posts">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @foreach (var item in Model.ArticleListDto.Articles)
+                            {
+                                @if (item.IsActive)
+                                {
+                                    <br />
+                                    <div class="blog-post">
+                                        <div class="blog-thumb">
+                                            <img src="~/images/blog-post-01.jpg" />
+                                        </div>
+                                        <div class="down-content">
+                                            <span>@item.Title</span>
+                                            <ul class="post-info">
+                                                <li><a href="#">Cem Keskin</a></li>
+                                                <li><a href="#">@item.CreatedDate.ToString("dd/MM/yyyy")</a></li>
+                                                <li><a href="#">@item.ViewCount</a></li>
+                                            </ul>
+                                            <p>
+                                                @{
+                                                    item.Content = regex.Replace(item.Content, "");
+                                                }
+                                                @(item.Content.Length > 280 ? item.Content.Substring(0, 280) : item.Content) ...
+                                            </p>
+                                            <div class="post-options">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <ul class="post-tags">
+                                                            <li><i style="color: #3AAA64" class="fa fa-tags"></i></li>
+                                                            <li><a href="#">@item.Category.Name</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <ul class="post-share">
+                                                            <li><i style="color: #3AAA64" class="fa fa-link"></i></li>
+                                                            <li><a href="#">[Devamını Oku]</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+
+
+                        <!-- Pagination -->
+                        <ul class="pagination justify-content-center mb-4 btn-block">
+                            @{
+                                @if (Model.ArticleListDto.ShowPrevious)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" asp-route-currentPage="@(Model.ArticleListDto.CurrentPage-1)" asp-route-isAscending="@Model.ArticleListDto.IsAscending" asp-route-pageSize="@Model.ArticleListDto.PageSize" asp-route-keyword="@Model.Keyword">Önceki</a>
+                                    </li>
+
+                                }
+                                @for (var i = 1; i <= Model.ArticleListDto.TotalPages; i++)
+                                {
+                                    <li class="page-item @(i == Model.ArticleListDto.CurrentPage ? "active" : "")">
+                                        <a class="page-link" asp-route-currentPage="@i" asp-route-isAscending="@Model.ArticleListDto.IsAscending" asp-route-pageSize="@Model.ArticleListDto.PageSize" asp-route-keyword="@Model.Keyword">@i</a>
+                                    </li>
+                                }
+                                @if (Model.ArticleListDto.ShowNext)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" asp-route-currentPage="@(Model.ArticleListDto.CurrentPage+1)" asp-route-isAscending="@Model.ArticleListDto.IsAscending" asp-route-pageSize="@Model.ArticleListDto.PageSize" asp-route-keyword="@Model.Keyword">Sonraki</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+
+                    </div>
+                </div>
+            </h1>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            $(function () {
+
+                const selectPageSize = $('#select-page-size');
+                const selectIsAscending = $('#select-is-ascending');
+                const keyword = $('#keyword').val();
+                const currentPage = $('#current-page').val();
+                const keywordQuery = keyword !== null ? `&keyword=${keyword}` : null;
+
+                selectPageSize.on('change',
+                    function () {
+                        window.location =
+                            `/?pageSize=${selectPageSize.val()}&isAscending=${selectIsAscending.val()}${keywordQuery != null ? keywordQuery : null}&currentPage=${currentPage}`;
+                    });
+                selectIsAscending.on('change',
+                    function () {
+                        window.location =
+                            `/?pageSize=${selectPageSize.val()}&isAscending=${selectIsAscending.val()}${keywordQuery != null ? keywordQuery : null}&currentPage=${currentPage}`;
+                    });
+            });
+        });
+    </script>
+}

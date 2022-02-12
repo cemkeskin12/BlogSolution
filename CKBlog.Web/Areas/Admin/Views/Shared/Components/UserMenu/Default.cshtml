@@ -1,0 +1,15 @@
+﻿@model CKBlog.Web.Areas.Admin.Models.UserViewModel
+
+    <a class="dropdown-item" href="#">
+        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Profilim
+    </a>
+    <a class="dropdown-item" asp-area="Admin" asp-controller="Auth" asp-action="Login">
+        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>Ayarlar
+    </a>
+    <a class="dropdown-item" href="#">
+        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>Loglar
+    </a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" asp-area="Admin" asp-controller="Auth" asp-action="Logout">
+        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Çıkış Yap
+    </a>

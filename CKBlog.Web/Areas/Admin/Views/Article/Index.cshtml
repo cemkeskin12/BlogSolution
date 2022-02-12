@@ -1,0 +1,83 @@
+﻿@using System.Globalization
+@model CKBlog.Web.Areas.Admin.Models.ArticleListModel
+<ol class="breadcrumb mb-3 mt-2">
+    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
+    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Article" asp-action="Index">Makaleler</a></li>
+</ol>
+<div class="card mb-4 mt-2">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Makaleler
+        <a asp-area="Admin" asp-controller="Article" asp-action="Add" class="btn btn-success float-right font-weight-bold">Ekle <i class="fa fa-plus"></i></a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="articlesTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Başlık</th>
+                        <th>İçerik</th>
+                        <th>Oluşturulma Tarihi</th>
+                        <th>Düzenlenme Tarihi</th>
+                        <th>Oluşturan</th>
+                        <th>Düzenleyen</th>
+                        <th>Kategori</th>
+                        <th>Aktif Mi?</th>
+                        <th>Ayarlar</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Başlık</th>
+                        <th>İçerik</th>
+                        <th>Oluşturulma Tarihi</th>
+                        <th>Düzenlenme Tarihi</th>
+                        <th>Oluşturan</th>
+                        <th>Düzenleyen</th>
+                        <th>Kategori</th>
+                        <th>Aktif Mi?</th>
+                        <th>Ayarlar</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model.Articles)
+                    {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+                        <td>@item.Content.Substring(0,25)</td>
+                        <td>@item.CreatedDate.ToString("dd/MM/yyyy hh/mm")</td>
+                        <td>@item.ModifiedDate.ToString("dd/MM/yyyy hh/mm")</td>
+                        <td>@item.CreatedByName</td>
+                        <td>@item.ModifiedByName</td>
+                        <td>@item.Category.Name</td>
+                        <td class="@(item.IsActive ? "text-success" : "text-danger")">@(item.IsActive ? "Evet" : "Hayır")</td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="dropdown-toggle text-primary font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Ayarla
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="text-info dropdown-item">Detaylar</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="text-warning dropdown-item" href="Article/Update/@item.Id">Düzenle</a>
+                                    <a class="@(item.IsActive ? "text-danger" : "text-primary") dropdown-item" href="Article/Delete/@item.Id">
+                                        @(item.IsActive ? "Sil" : "Geri Al")
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Admin/ArticleDataTable.js" type="application/ecmascript"></script>
+}

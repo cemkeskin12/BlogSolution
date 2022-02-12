@@ -1,0 +1,15 @@
+﻿@model List<CKBlog.Entity.DbObjects.Article>
+    
+<div class="content">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="post-details.html">
+                    <h5>@item.Title</h5>
+                    <span>@item.ModifiedDate.ToString("dd MMMM yyyy")</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,19 @@
+﻿@using Microsoft.CodeAnalysis
+@model System.Collections.Generic.List<CKBlog.Entity.DbObjects.Role>
+
+
+
+
+<select class="form-control" id="mySelect" name="cars" id="cars" onchange="selectionchange();">
+    @foreach (var item in Model)
+    {
+        <option value="@item.Name">@item.Name</option>
+
+
+    }
+</select>
+@section Scripts
+{
+
+    <script src="~/Admin/JavaScript.js"></script>
+}

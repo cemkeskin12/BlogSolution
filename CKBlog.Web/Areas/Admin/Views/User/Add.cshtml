@@ -1,0 +1,71 @@
+﻿@model CKBlog.Web.Areas.Admin.Models.UserAddModel
+
+<ol class="breadcrumb mb-3 mt-2">
+    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
+    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="User" asp-action="Index">Makaleler</a></li>
+    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="User" asp-action="Add">Ekle</a></li>
+</ol>
+
+
+<form asp-controller="User" asp-action="Add" method="post" enctype="multipart/form-data">
+    <div class="row mt-2">
+        <div class="col-md-8">
+            <div class="card" style="min-height: 314px">
+                <div class="card-header">
+                    Temel Bilgiler
+                </div>
+                <div class="card-body">
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control" placeholder="İsim" asp-for="FirstName" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control" placeholder="Soyisim" asp-for="LastName" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control" placeholder="Kullanıcı Adı" asp-for="UserName" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="email" class="form-control" placeholder="Email Adresi" asp-for="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Diğer Bilgiler
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        @await Component.InvokeAsync("RoleDropdown")
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Rol" id="txt" autofocus="autofocus" aria-disabled="True" style="display: none" asp-for="Role"></input>
+                        <span asp-validation-for="Role" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Şifre" asp-for="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Şifre Tekrar" asp-for="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block mt-4">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+{
+
+    <script src="~/Admin/RoleAddHelper.js"></script>
+}

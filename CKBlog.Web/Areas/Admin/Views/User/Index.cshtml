@@ -1,0 +1,61 @@
+﻿@model List<CKBlog.Entity.DbObjects.User>
+    <ol class="breadcrumb mb-3 mt-2">
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
+        <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="User" asp-action="Index">Kullanıcılar</a></li>
+    </ol>
+
+<div class="card mb-4 mt-2">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Makaleler
+        <a asp-area="Admin" asp-controller="User" asp-action="Add" class="btn btn-success float-right font-weight-bold">Ekle <i class="fa fa-plus"></i></a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>İsim</th>
+                        <th>Soyisim</th>
+                        <th>Kullanıcı Adı</th>
+                        <th>Mail Adresi</th>
+                        <th>Düzenle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>İsim</th>
+                        <th>Soyisim</th>
+                        <th>Kullanıcı Adı</th>
+                        <th>Mail Adresi</th>
+                        <th>Düzenle</th>
+                        <th>Sil</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Email</td>
+                            <td><a class="text-warning font-weight-bold" asp-area="Admin" asp-controller="User" asp-action="Update" asp-route-id="@item.Id">Düzenle</a></td>
+                            <td><a class="text-danger font-weight-bold" asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-id="@item.Id">Sil</a></td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Admin/UserDataTable.js" type="application/ecmascript"></script>
+}

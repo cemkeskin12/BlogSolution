@@ -1,0 +1,31 @@
+﻿@model CKBlog.Web.Areas.Admin.Models.CategoryUpdateModel
+
+<ol class="breadcrumb mb-3 mt-2">
+    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
+    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriler</a></li>
+    <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Category" asp-action="Update">Güncelle</a></li>
+</ol>
+
+
+<form asp-controller="Category" asp-action="Update" method="post" enctype="multipart/form-data">
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <div class="card">
+
+                <div class="card-header">
+                    Kategori Bilgileri
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <input type="text" id="categoryTitle" class="form-control" placeholder="Makale Başlığı" asp-for="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-4">Kaydet</button>
+                    <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="btn btn-dark mt-4">Vazgeç</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</form>
