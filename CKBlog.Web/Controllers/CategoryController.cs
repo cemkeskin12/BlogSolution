@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CKBlog.Service.Services.Abstract;
+using CKBlog.Web.Areas.Admin.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,15 @@ namespace CKBlog.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        public IActionResult Index()
+        private readonly ICategoryService _categoryService;
+        public CategoryController(ICategoryService categoryService)
         {
-            return View();
+            _categoryService = categoryService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var categories = await _categoryService.ListAllCategoriesAsync();
+            return View(categories);
         }
     }
 }
