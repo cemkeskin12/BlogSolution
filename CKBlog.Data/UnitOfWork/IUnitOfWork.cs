@@ -11,6 +11,7 @@ namespace CKBlog.Data.UnitOfWork
     {
         IArticleRepository Articles { get; }
         ICategoryRepository Categories { get; }
+        ISocialMediaRepository SocialMedias { get; }
         Task<int> SaveAsync();
         int Save();
     }

@@ -20,11 +20,14 @@ namespace CKBlog.Service.Extensions
         {
 
             serviceCollection.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            
             serviceCollection.AddScoped<IArticleRepository, ArticleRepository>();
             serviceCollection.AddScoped<ICategoryRepository, CategoryRepository>();
+            serviceCollection.AddScoped<ISocialMediaRepository, SocialMediaRepository>();
 
             serviceCollection.AddScoped<IArticleService, ArticleService>();
             serviceCollection.AddScoped<ICategoryService, CategoryService>();
+            serviceCollection.AddScoped<ISocialMediaService, SocialMediaService>();
 
             serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
 

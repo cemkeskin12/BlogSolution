@@ -14,6 +14,7 @@ namespace CKBlog.Data.UnitOfWork
         private readonly ApplicationDbContext _dbContext;
         private ArticleRepository _articleRepository;
         private CategoryRepository _categoryRepository;
+        private SocialMediaRepository _socialMediaRepository;
 
         public UnitOfWork(ApplicationDbContext dbContext)
         {
@@ -21,6 +22,7 @@ namespace CKBlog.Data.UnitOfWork
         }
         public IArticleRepository Articles => _articleRepository ?? new ArticleRepository(_dbContext);
         public ICategoryRepository Categories => _categoryRepository ?? new CategoryRepository(_dbContext);
+        public ISocialMediaRepository SocialMedias => _socialMediaRepository ?? new SocialMediaRepository(_dbContext);
 
         public async ValueTask DisposeAsync()
         {
