@@ -38,6 +38,8 @@ namespace CKBlog.Web.Controllers
         }
         public async Task<IActionResult> Index(int? categoryId, int currentPage = 1, int pageSize = 3, bool isAscending = false)
         {
+
+            _logger.LogWarning("Şimdi buradasın");
             var articlesResult = await (categoryId == null
                 ? _articleService.GetAllByPagingAsync(null, currentPage, pageSize, isAscending)
                 : _articleService.GetAllByPagingAsync(categoryId.Value, currentPage, pageSize, isAscending));
