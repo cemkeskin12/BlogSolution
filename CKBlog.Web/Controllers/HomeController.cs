@@ -43,5 +43,10 @@ namespace CKBlog.Web.Controllers
                 : _articleService.GetAllByPagingAsync(categoryId.Value, currentPage, pageSize, isAscending));
             return View(articlesResult);
         }
+        public async Task<IActionResult> Detail(int id)
+        {
+            var value = await _articleService.ListAllArticlesByIdAsync(id);
+            return View(value);
+        }
     }
 }

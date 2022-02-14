@@ -14,7 +14,7 @@ namespace CKBlog.Service.Services.Abstract
         Task<List<Article>> ListAllArticlesAsync();
         Task<List<Article>> ListMostReadArticlesAsync();
         Task<List<Article>> ListRandomArticlesAsync();
-
+        Task<List<Article>> ListAllArticlesByIdAsync(int id);
         Task<Article> ArticleAddAsync(Article entity, string createdByName);
 
         Task<Article> GetByIdArticleAsync(int id);

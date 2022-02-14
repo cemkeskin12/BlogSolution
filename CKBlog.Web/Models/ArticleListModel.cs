@@ -10,7 +10,6 @@ namespace CKBlog.Web.Models
     {
         public IList<Article> Articles { get; set; }
         public int? CategoryId { get; set; }
-        public Category Category { get; set; }
 
     }
 }

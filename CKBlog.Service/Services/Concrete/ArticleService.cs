@@ -142,5 +142,10 @@ namespace CKBlog.Service.Services.Concrete
             _unitOfWork.Save();
             return result;
         }
+
+        public async Task<List<Article>> ListAllArticlesByIdAsync(int id)
+        {
+            return await _unitOfWork.Articles.GetAllAsync(x => x.Id == id, x => x.Category);
+        }
     }
 }
