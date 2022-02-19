@@ -51,7 +51,6 @@ namespace CKBlog.Web.Areas.Admin.Controllers
             });
         }
         [Authorize(Roles = "SuperAdmin,Manager,Editor")]
-
         [HttpPost]
         public async Task<IActionResult> Add(Article article, IFormFile image)
         {
