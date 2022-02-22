@@ -148,7 +148,7 @@ namespace CKBlog.Service.Services.Concrete
 
         public async Task<List<Article>> GetAllArticlesByCategoryId(int id)
         {
-            return await _unitOfWork.Articles.GetAllAsync(x => x.CategoryId == id,x => x.Category);
+            return await _unitOfWork.Articles.GetAllAsync(x => x.CategoryId == id, x => x.Category);
 
         }
     }
