@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using CKBlog.Data.UnitOfWork;
+﻿using CKBlog.Data.UnitOfWork;
 using CKBlog.Entity.DbObjects;
 using CKBlog.Entity.Dtos;
 using CKBlog.Service.Services.Abstract;
-using X.PagedList;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace CKBlog.Service.Services.Concrete
 {
@@ -146,6 +144,12 @@ namespace CKBlog.Service.Services.Concrete
         public async Task<List<Article>> ListAllArticlesByIdAsync(int id)
         {
             return await _unitOfWork.Articles.GetAllAsync(x => x.Id == id, x => x.Category);
+        }
+
+        public async Task<List<Article>> GetAllArticlesByCategoryId(int id)
+        {
+            return await _unitOfWork.Articles.GetAllAsync(x => x.CategoryId == id,x => x.Category);
+
         }
     }
 }

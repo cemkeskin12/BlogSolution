@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CKBlog.Entity.DbObjects;
+﻿using CKBlog.Entity.DbObjects;
 using CKBlog.Entity.Dtos;
-using X.PagedList;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CKBlog.Service.Services.Abstract
 {
@@ -15,6 +11,7 @@ namespace CKBlog.Service.Services.Abstract
         Task<List<Article>> ListMostReadArticlesAsync();
         Task<List<Article>> ListRandomArticlesAsync();
         Task<List<Article>> ListAllArticlesByIdAsync(int id);
+        Task<List<Article>> GetAllArticlesByCategoryId(int id);
         Task<Article> ArticleAddAsync(Article entity, string createdByName);
 
         Task<Article> GetByIdArticleAsync(int id);

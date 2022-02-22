@@ -29,6 +29,7 @@ namespace CKBlog.Web.Areas.Admin.Controllers
             _articleService = articleService;
             _categoryService = categoryService;
         }
+
         [Authorize(Roles = "SuperAdmin,Manager,Editor,User")]
 
         public async Task<IActionResult> Index()

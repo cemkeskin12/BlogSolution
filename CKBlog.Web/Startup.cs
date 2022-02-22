@@ -1,19 +1,15 @@
+ï»¿using CKBlog.Data.Context;
+using CKBlog.Entity.DbObjects;
+using CKBlog.Service.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CKBlog.Data.Context;
-using CKBlog.Entity.DbObjects;
-using CKBlog.Service.Extensions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace CKBlog.Web
 {
@@ -29,8 +25,13 @@ namespace CKBlog.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(opt =>
+            {
+                opt.IdleTimeout = TimeSpan.FromSeconds(5);
+                opt.Cookie.HttpOnly = true;
+            });
             services.AddHttpContextAccessor();
-            services.AddSession();
+
             services.LoadMyService();
             services.AddDbContext<ApplicationDbContext>(options => options
                 .UseSqlServer(Configuration.GetConnectionString("MyConnection")));
@@ -50,7 +51,7 @@ namespace CKBlog.Web
                 options.SignIn.RequireConfirmedEmail = false;
             }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             services.AddControllersWithViews(
-                options => options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(value=> "Bu alan boþ geçilmemelidir.")
+                options => options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(value => "Bu alan boÅŸ geÃ§ilmemelidir.")
             ).AddRazorRuntimeCompilation();
             services.ConfigureApplicationCookie(options =>
             {

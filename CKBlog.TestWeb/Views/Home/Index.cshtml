@@ -1,0 +1,21 @@
+﻿@using CKBlog.TestWeb.Entities
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Article>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+
+            <div class="card mr-3" style="width: 18rem;">
+                <img class="card-img-top" src="~/images/banner-item-01.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">@item.Context</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@using CKBlog.Entity.DbObjects
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<Article>
+
+    <section class="blog-posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 pt-5 pb-5" style="background: #1E2124">
+
+                <div class="all-blog-posts">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @foreach (var item in Model)
+                            {
+                                <br />
+                                <div class="blog-post">
+                                    <div class="blog-thumb">
+                                        <img style="height: 450px" src="~/images/@item.Thumbnail" alt="@item.Thumbnail" />
+                                    </div>
+                                    <div class="down-content">
+                                        <span>@item.Title</span>
+                                        <ul class="post-info">
+                                            <li><a href="#">Cem Keskin</a></li>
+                                            <li><a href="#">@item.CreatedDate.ToString("dd/MM/yyyy")</a></li>
+                                            <li><a href="#">@item.ViewCount</a></li>
+                                        </ul>
+                                        <p>
+                                            @item.Content
+                                        </p>
+                                        <div class="post-options">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <ul class="post-tags">
+                                                        <li><i style="color: #3AAA64" class="fa fa-tags"></i></li>
+                                                        <li><a href="#">@item.Category.Name</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

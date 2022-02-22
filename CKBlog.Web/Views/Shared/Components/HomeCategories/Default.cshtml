@@ -5,7 +5,7 @@
 
         @foreach (var item in Model.Where(item => item.IsActive).Take(24))
         {
-            <li><a href="#">- @item.Name</a></li>
+            <li><a href="Category/Detail/@item.Id">- @item.Name</a></li>
         }
     </ul>
 </div>

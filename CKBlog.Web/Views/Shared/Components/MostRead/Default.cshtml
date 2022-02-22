@@ -5,7 +5,7 @@
         @foreach (var item in Model)
         {
             <li>
-                <a href="post-details.html">
+                <a href="Home/Detail/@item.Id">
                     <h5>@item.Title</h5>
                     <span>@item.ModifiedDate.ToString("dd MMMM yyyy")</span>
                 </a>
